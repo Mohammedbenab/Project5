@@ -23,6 +23,7 @@ public class PersonService {
 	@Autowired
 	private ReadJsonFile readObject;
 
+//	@Autowired
 	private PersonList personList;
 
 	@PostConstruct
@@ -33,13 +34,16 @@ public class PersonService {
 	public PersonListDTO savePerson(PersonDTO personDto) {
 		Person person = IObjectToDto.INSTANCE.dtoToPerson(personDto);
 		List<Person> persons = personList.getPersons();
+		int result = 0;
 		for (Person personInList : persons) {
-			if (!personInList.getFirstName().equals(personDto.getFirstName())
-					&& !personInList.getLastName().equals(personDto.getLastName())) {
-				persons.add(person);
-				logger.info("Person dos not exist in the list, she was created");
-
+			if (personInList.getFirstName().equals(personDto.getFirstName())
+					&& personInList.getLastName().equals(personDto.getLastName())) {
+				result = +1;
 			}
+		}
+		if (result == 0) {
+			persons.add(person);
+			logger.info("Person dos not exist in the list, she was created");
 		}
 		PersonList personList = new PersonList(persons);
 		PersonListDTO personListDTO = IObjectToDto.INSTANCE.personListToDtoList(personList);
@@ -75,8 +79,8 @@ public class PersonService {
 		Person personObj = IObjectToDto.INSTANCE.dtoToPerson(personDto);
 		List<Person> list = personList.getPersons();
 		for (Person person : list) {
-			if (!person.getFirstName().equals(personObj.getFirstName())
-					&& !person.getLastName().equals(personObj.getLastName())) {
+			if (person.getFirstName().equals(personObj.getFirstName())
+					&& person.getLastName().equals(personObj.getLastName())) {
 				list.remove(person);
 				logger.info("Person was deleted");
 			}

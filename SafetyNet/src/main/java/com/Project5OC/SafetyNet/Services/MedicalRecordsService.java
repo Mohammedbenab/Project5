@@ -23,6 +23,7 @@ public class MedicalRecordsService {
 	@Autowired
 	private ReadJsonFile readObject;
 
+//	@Autowired
 	private MedicalRecordsList medicalRecordsList;
 
 	@PostConstruct
@@ -33,12 +34,15 @@ public class MedicalRecordsService {
 	public MedicalRecordsListDTO saveMedical(MedicalRecordsDTO medicalRecordsDTO) {
 		MedicalRecords medicalRecordsObj = IObjectToDto.INSTANCE.dtoToMedicalRecords(medicalRecordsDTO);
 		List<MedicalRecords> medicalList = medicalRecordsList.getMedicalRecords();
+		int result = 0;
 		for (MedicalRecords medical : medicalList) {
-			if (!medical.getBirthdate().equals(medicalRecordsDTO.getBirthdate())) {
-				medicalList.add(medicalRecordsObj);
-				logger.info("Firestation dos not exist, it was created");
-
+			if (medical.getBirthdate().equals(medicalRecordsDTO.getBirthdate())) {
+				result = +1;
 			}
+		}
+		if (result == 0) {
+			medicalList.add(medicalRecordsObj);
+			logger.info("Medicalrecords dos not exist, it was created");
 		}
 		MedicalRecordsList medicalRecordsList = new MedicalRecordsList(medicalList);
 		MedicalRecordsListDTO medicalRecordsListDTO = IObjectToDto.INSTANCE

@@ -27,14 +27,14 @@ public interface IObjectsToUrl {
 			@Mapping(target = "lastName", source = "personAllInfo.person.lastName"),
 			@Mapping(target = "address", source = "personAllInfo.person.address"),
 			@Mapping(target = "phone", source = "personAllInfo.person.phone"),
-			@Mapping(target = "age", expression = "java(convert.calculateAge(personAllInfo.medicalRecords.birthdate)")
+			@Mapping(target = "age", expression = "java(convert.calculateAge(personAllInfo.medicalRecords.birthdate))")
 	})
 	PersonUrl1Dto objectsToUrl1Dto(PersonAllInfo personAllInfo, BeforeMapping convert);
 
 	@Mappings({
 			@Mapping(target = "firstName", source = "personAllInfo.person.firstName"),
 			@Mapping(target = "lastName", source = "personAllInfo.person.lastName"),
-			@Mapping(target = "age", expression = "java(convert.calculateAge(personAllInfo.medicalRecords.birthdate)")
+			@Mapping(target = "age", expression = "java(convert.calculateAge(personAllInfo.medicalRecords.birthdate))")
 
 	})
 	PersonUrl2Dto objectToUrl2Dto(PersonAllInfo personAllInfo, BeforeMapping convert);
@@ -47,7 +47,7 @@ public interface IObjectsToUrl {
 	@Mappings({
 			@Mapping(target = "firstName", source = "personAllInfo.person.firstName"),
 			@Mapping(target = "lastName", source = "personAllInfo.person.lastName"),
-			@Mapping(target = "age", expression = "java(convert.calculateAge(personAllInfo.medicalRecords.birthdate)"),
+			@Mapping(target = "age", expression = "java(convert.calculateAge(personAllInfo.medicalRecords.birthdate))"),
 			@Mapping(target = "phone", source = "personAllInfo.person.phone"),
 			@Mapping(target = "medications", source = "personAllInfo.medicalRecords.medications"),
 			@Mapping(target = "allergies", source = "personAllInfo.medicalRecords.allergies")
@@ -57,7 +57,7 @@ public interface IObjectsToUrl {
 
 	@Mappings({
 			@Mapping(target = "lastName", source = "personAllInfo.person.lastName"),
-			@Mapping(target = "age", expression = "java(convert.calculateAge(personAllInfo.medicalRecords.birthdate)"),
+			@Mapping(target = "age", expression = "java(convert.calculateAge(personAllInfo.medicalRecords.birthdate))"),
 			@Mapping(target = "phone", source = "personAllInfo.person.phone"),
 			@Mapping(target = "address", source = "personAllInfo.person.address"),
 			@Mapping(target = "medications", source = "personAllInfo.medicalRecords.medications"),
@@ -68,7 +68,7 @@ public interface IObjectsToUrl {
 
 	@Mappings({
 			@Mapping(target = "lastName", source = "personAllInfo.person.lastName"),
-			@Mapping(target = "age", expression = "java(convert.calculateAge(personAllInfo.medicalRecords.birthdate)"),
+			@Mapping(target = "age", expression = "java(convert.calculateAge(personAllInfo.medicalRecords.birthdate))"),
 			@Mapping(target = "email", source = "personAllInfo.person.email"),
 			@Mapping(target = "address", source = "personAllInfo.person.address"),
 			@Mapping(target = "medications", source = "personAllInfo.medicalRecords.medications"),

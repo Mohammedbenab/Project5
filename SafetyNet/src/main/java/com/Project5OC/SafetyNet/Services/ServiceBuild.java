@@ -70,7 +70,8 @@ public class ServiceBuild {
 	}
 
 	public PersonsListUrl1Dto getPersonsForUrl1(String station) {
-		List<PersonAllInfo> personsAllInf = this.listOfPersonsWithAllInfo().getPersonsList();
+		List<PersonAllInfo> personsAllInf = new ArrayList<PersonAllInfo>();
+		personsAllInf = this.listOfPersonsWithAllInfo().getPersonsList();
 		List<PersonUrl1Dto> listUrl = new ArrayList<PersonUrl1Dto>();
 		int nbrAdults = 0;
 		int nbrChildren = 0;
@@ -78,8 +79,8 @@ public class ServiceBuild {
 			if ((allInfPerson.getFirestation().getStation()).equals(station)) {
 				PersonAllInfo personAllInfo = new PersonAllInfo(allInfPerson.getPerson(), allInfPerson.getFirestation(),
 						allInfPerson.getMedicalRecords());
-//				PersonUrl1Dto personUrl1Dto = IObjectsToUrl.INSTANCE.objectsToUrl1Dto(personAllInfo, convertString);
-				PersonUrl1Dto personUrl1Dto = objectsToUrlImpl.objectsToUrl1Dto(personAllInfo, convertString);
+				PersonUrl1Dto personUrl1Dto = IObjectsToUrl.INSTANCE.objectsToUrl1Dto(personAllInfo, convertString);
+//				PersonUrl1Dto personUrl1Dto = objectsToUrlImpl.objectsToUrl1Dto(personAllInfo, convertString);
 
 				listUrl.add(personUrl1Dto);
 				if (Integer.valueOf(personUrl1Dto.getAge()) >= 18) {

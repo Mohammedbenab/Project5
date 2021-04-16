@@ -28,6 +28,42 @@ import com.Project5OC.SafetyNet.model.PersonsAllInfoList;
 @Service
 public class IObjectToDtoImpl implements IObjectToDto {
 
+//	@Autowired
+//	private FirestationDTO firestationDTO;
+//
+//	@Autowired
+//	private Firestation firestation;
+//
+//	@Autowired
+//	private FirestationListDTO firestationListDTO;
+//
+//	@Autowired
+//	private MedicalRecordsDTO medicalRecordsDTO;
+//
+//	@Autowired
+//	private MedicalRecords medicalRecords;
+//
+//	@Autowired
+//	private MedicalRecordsListDTO medicalRecordsListDTO;
+//
+//	@Autowired
+//	private PersonDTO personDTO;
+//
+//	@Autowired
+//	private Person person;
+//
+//	@Autowired
+//	private PersonListDTO personListDTO;
+//
+//	@Autowired
+//	private PersonAllInfoDTO personAllInfoDTO;
+//
+//	@Autowired
+//	private PersonAllInfo personAllInfo;
+//
+//	@Autowired
+//	private PersonAllInfoListDTO personAllInfoListDTO;
+
 	@Override
 	public FirestationDTO firestationToDto(Firestation firestation) {
 		if (firestation == null) {

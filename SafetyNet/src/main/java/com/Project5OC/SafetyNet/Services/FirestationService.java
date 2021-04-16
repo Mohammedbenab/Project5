@@ -33,23 +33,30 @@ public class FirestationService {
 
 	public FirestationListDTO saveFirestation(FirestationDTO firestationDTO) {
 		List<Firestation> listFirestation = new ArrayList<Firestation>();
-		Firestation firestation = new Firestation();
-		firestation = IObjectToDto.INSTANCE.dtoToFirestation(firestationDTO);
+		Firestation firestationObj = IObjectToDto.INSTANCE.dtoToFirestation(firestationDTO);
 		listFirestation = firestationsList.getFirestations();
-		listFirestation.add(firestation);
-
-//		for (Firestation firestationInList : listFirestation) {
-//			if (!firestationInList.getAddress().equals(firestation.getAddress())) {
-//				listFirestation.add(firestation);
-//				logger.info("Firestation dos not exist, it was created");
-//			}
-//		}
+		int result = 0;
+		for (Firestation fire : listFirestation) {
+			if (fire.getAddress().equals(firestationObj.getAddress())
+					&& fire.getStation().equals(firestationObj.getStation())) {
+				result = +1;
+			}
+		}
+		if (result == 0) {
+			listFirestation.add(firestationObj);
+			logger.info("Firestation dos not exist, it was created");
+		}
 		FirestationsList firestationsListFinal = new FirestationsList(listFirestation);
 		FirestationListDTO firestationListDTO = IObjectToDto.INSTANCE.firestationListToDtoList(firestationsListFinal);
 		logger.trace("FirestationListDTO was created");
 		return firestationListDTO;
 	}
 
+	// la logique aurait été d'indiquer les informations de la station que nous
+	// voulons changer
+	// modifier
+	// The Idea, it's find solution for this problem
+	// L'ideal aurait été de distinguer chaqu'une des stations par un nb diff
 	public FirestationListDTO updateFirestation(FirestationDTO firestationDTO) {
 		List<Firestation> firestationList = new ArrayList<Firestation>();
 		Firestation firestation = IObjectToDto.INSTANCE.dtoToFirestation(firestationDTO);
@@ -76,14 +83,14 @@ public class FirestationService {
 		firestationList = firestationsList.getFirestations();
 		for (Firestation firestation : firestationList) {
 			if ((firestation.getStation().equals(firestationObj.getStation())
-					|| firestation.getAddress().equals(firestationObj.getAddress()))) {
-				firestationList.remove(firestation);
+					&& firestation.getAddress().equals(firestationObj.getAddress()))) {
+				firestationList.remove(firestationObj);
 				logger.info("Firestation was deleted");
 			}
 		}
 		FirestationsList firestationListF = new FirestationsList(firestationList);
 		FirestationListDTO FireStaListDTO = IObjectToDto.INSTANCE.firestationListToDtoList(firestationListF);
-		logger.info("FireStaListDTO was updated");
+		logger.info("FireStaListDTO was update");
 		return FireStaListDTO;
 	}
 

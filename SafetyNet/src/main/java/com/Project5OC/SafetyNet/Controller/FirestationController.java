@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Project5OC.SafetyNet.DTO.FirestationDTO;
 import com.Project5OC.SafetyNet.DTO.FirestationListDTO;
 import com.Project5OC.SafetyNet.Services.FirestationService;
-import com.Project5OC.SafetyNet.model.Firestation;
 
 @RestController
 public class FirestationController {
@@ -22,17 +21,6 @@ public class FirestationController {
 	public FirestationListDTO addNewPerson(@RequestBody FirestationDTO firestationDTO) {
 		return build.saveFirestation(firestationDTO);
 
-	}
-
-	/**
-	 * test function for looking for problem in my method
-	 * 
-	 * @param firestation
-	 * @return
-	 */
-	@PostMapping(value = "testPost")
-	public Firestation testLaMethodPost(@RequestBody Firestation firestation) {
-		return firestation;
 	}
 
 	@PutMapping(value = "firestationUpdate")
