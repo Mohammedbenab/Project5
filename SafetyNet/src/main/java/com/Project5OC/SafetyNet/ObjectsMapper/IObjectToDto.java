@@ -1,10 +1,9 @@
-package com.Project5OC.SafetyNet.mapper;
+package com.Project5OC.SafetyNet.ObjectsMapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.mapstruct.factory.Mappers;
-import org.springframework.stereotype.Service;
+import org.mapstruct.ReportingPolicy;
 
 import com.Project5OC.SafetyNet.DTO.FirestationDTO;
 import com.Project5OC.SafetyNet.DTO.FirestationListDTO;
@@ -23,11 +22,10 @@ import com.Project5OC.SafetyNet.model.PersonAllInfo;
 import com.Project5OC.SafetyNet.model.PersonList;
 import com.Project5OC.SafetyNet.model.PersonsAllInfoList;
 
-@Mapper
-@Service
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IObjectToDto {
 
-	IObjectToDto INSTANCE = Mappers.getMapper(IObjectToDto.class);
+//	IObjectToDto INSTANCE = Mappers.getMapper(IObjectToDto.class);
 
 	FirestationDTO firestationToDto(Firestation firestation);
 

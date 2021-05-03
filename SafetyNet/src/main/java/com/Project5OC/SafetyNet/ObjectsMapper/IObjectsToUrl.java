@@ -1,10 +1,8 @@
-package com.Project5OC.SafetyNet.mapper;
+package com.Project5OC.SafetyNet.ObjectsMapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.mapstruct.factory.Mappers;
-import org.springframework.stereotype.Service;
 
 import com.Project5OC.SafetyNet.DTO.URL.Url1.PersonUrl1Dto;
 import com.Project5OC.SafetyNet.DTO.URL.Url2.PersonUrl2Dto;
@@ -17,10 +15,9 @@ import com.Project5OC.SafetyNet.Services.BeforeMapping;
 import com.Project5OC.SafetyNet.model.PersonAllInfo;
 
 @Mapper(imports = BeforeMapping.class)
-@Service
 public interface IObjectsToUrl {
 
-	IObjectsToUrl INSTANCE = Mappers.getMapper(IObjectsToUrl.class);
+//	IObjectsToUrl INSTANCE = Mappers.getMapper(IObjectsToUrl.class);
 
 	@Mappings({
 			@Mapping(target = "firstName", source = "personAllInfo.person.firstName"),

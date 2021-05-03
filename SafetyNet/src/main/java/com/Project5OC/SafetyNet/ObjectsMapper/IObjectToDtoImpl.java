@@ -1,11 +1,11 @@
-package com.Project5OC.SafetyNet.mapper;
+package com.Project5OC.SafetyNet.ObjectsMapper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Generated;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.Project5OC.SafetyNet.DTO.FirestationDTO;
 import com.Project5OC.SafetyNet.DTO.FirestationListDTO;
@@ -24,45 +24,9 @@ import com.Project5OC.SafetyNet.model.PersonAllInfo;
 import com.Project5OC.SafetyNet.model.PersonList;
 import com.Project5OC.SafetyNet.model.PersonsAllInfoList;
 
-@Generated(value = "org.mapstruct.ap.MappingProcessor", date = "2021-01-18T18:38:07+0100", comments = "version: 1.4.1.Final, compiler: javac, environment: Java 11.0.2 (Oracle Corporation)")
-@Service
+@Generated(value = "org.mapstruct.ap.MappingProcessor", date = "2021-04-21T18:35:11+0200", comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.2 (Oracle Corporation)")
+@Component
 public class IObjectToDtoImpl implements IObjectToDto {
-
-//	@Autowired
-//	private FirestationDTO firestationDTO;
-//
-//	@Autowired
-//	private Firestation firestation;
-//
-//	@Autowired
-//	private FirestationListDTO firestationListDTO;
-//
-//	@Autowired
-//	private MedicalRecordsDTO medicalRecordsDTO;
-//
-//	@Autowired
-//	private MedicalRecords medicalRecords;
-//
-//	@Autowired
-//	private MedicalRecordsListDTO medicalRecordsListDTO;
-//
-//	@Autowired
-//	private PersonDTO personDTO;
-//
-//	@Autowired
-//	private Person person;
-//
-//	@Autowired
-//	private PersonListDTO personListDTO;
-//
-//	@Autowired
-//	private PersonAllInfoDTO personAllInfoDTO;
-//
-//	@Autowired
-//	private PersonAllInfo personAllInfo;
-//
-//	@Autowired
-//	private PersonAllInfoListDTO personAllInfoListDTO;
 
 	@Override
 	public FirestationDTO firestationToDto(Firestation firestation) {
@@ -111,11 +75,9 @@ public class IObjectToDtoImpl implements IObjectToDto {
 			return null;
 		}
 
-		List<Firestation> firestations = null;
+		FirestationsList firestationsList = new FirestationsList();
 
-		firestations = firestationDTOListToFirestationList(firestationListDTO.getFirestationDTO());
-
-		FirestationsList firestationsList = new FirestationsList(firestations);
+		firestationsList.setFirestations(firestationDTOListToFirestationList(firestationListDTO.getFirestationDTO()));
 
 		return firestationsList;
 	}
@@ -186,11 +148,10 @@ public class IObjectToDtoImpl implements IObjectToDto {
 			return null;
 		}
 
-		List<MedicalRecords> medicalRecords = null;
+		MedicalRecordsList medicalRecordsList = new MedicalRecordsList();
 
-		medicalRecords = medicalRecordsDTOListToMedicalRecordsList(medicalRecordsListDTO.getMedicalRecordsDTO());
-
-		MedicalRecordsList medicalRecordsList = new MedicalRecordsList(medicalRecords);
+		medicalRecordsList.setMedicalRecords(
+				medicalRecordsDTOListToMedicalRecordsList(medicalRecordsListDTO.getMedicalRecordsDTO()));
 
 		return medicalRecordsList;
 	}
@@ -252,11 +213,9 @@ public class IObjectToDtoImpl implements IObjectToDto {
 			return null;
 		}
 
-		List<Person> persons = null;
+		PersonList personList = new PersonList();
 
-		persons = personDTOListToPersonList(personListDTO.getPersonsDTO());
-
-		PersonList personList = new PersonList(persons);
+		personList.setPersons(personDTOListToPersonList(personListDTO.getPersonsDTO()));
 
 		return personList;
 	}
@@ -311,11 +270,10 @@ public class IObjectToDtoImpl implements IObjectToDto {
 			return null;
 		}
 
-		List<PersonAllInfo> personsList = null;
+		PersonsAllInfoList personsAllInfoList = new PersonsAllInfoList();
 
-		personsList = personAllInfoDTOListToPersonAllInfoList(personAllInfoListDTO.getPersonAllInfoDTO());
-
-		PersonsAllInfoList personsAllInfoList = new PersonsAllInfoList(personsList);
+		personsAllInfoList
+				.setPersonsList(personAllInfoDTOListToPersonAllInfoList(personAllInfoListDTO.getPersonAllInfoDTO()));
 
 		return personsAllInfoList;
 	}

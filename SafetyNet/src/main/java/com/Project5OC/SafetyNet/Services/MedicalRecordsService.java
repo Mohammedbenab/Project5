@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.Project5OC.SafetyNet.DTO.MedicalRecordsDTO;
 import com.Project5OC.SafetyNet.DTO.MedicalRecordsListDTO;
-import com.Project5OC.SafetyNet.mapper.IObjectToDto;
+import com.Project5OC.SafetyNet.ObjectsMapper.IObjectToDtoImpl;
 import com.Project5OC.SafetyNet.model.MedicalRecords;
 import com.Project5OC.SafetyNet.model.MedicalRecordsList;
 
@@ -23,7 +23,9 @@ public class MedicalRecordsService {
 	@Autowired
 	private ReadJsonFile readObject;
 
-//	@Autowired
+	@Autowired
+	private IObjectToDtoImpl iObjectToDtoImpl;
+
 	private MedicalRecordsList medicalRecordsList;
 
 	@PostConstruct
@@ -32,7 +34,7 @@ public class MedicalRecordsService {
 	}
 
 	public MedicalRecordsListDTO saveMedical(MedicalRecordsDTO medicalRecordsDTO) {
-		MedicalRecords medicalRecordsObj = IObjectToDto.INSTANCE.dtoToMedicalRecords(medicalRecordsDTO);
+		MedicalRecords medicalRecordsObj = iObjectToDtoImpl.dtoToMedicalRecords(medicalRecordsDTO);
 		List<MedicalRecords> medicalList = medicalRecordsList.getMedicalRecords();
 		int result = 0;
 		for (MedicalRecords medical : medicalList) {
@@ -45,15 +47,14 @@ public class MedicalRecordsService {
 			logger.info("Medicalrecords dos not exist, it was created");
 		}
 		MedicalRecordsList medicalRecordsList = new MedicalRecordsList(medicalList);
-		MedicalRecordsListDTO medicalRecordsListDTO = IObjectToDto.INSTANCE
-				.medicalRecordsListToDtoList(medicalRecordsList);
+		MedicalRecordsListDTO medicalRecordsListDTO = iObjectToDtoImpl.medicalRecordsListToDtoList(medicalRecordsList);
 		logger.trace("MedicalRecordsListDTO was created");
 
 		return medicalRecordsListDTO;
 	}
 
 	public MedicalRecordsListDTO updateMedical(MedicalRecordsDTO medicalRecordsDTO) {
-		MedicalRecords medicalRecordsObj = IObjectToDto.INSTANCE.dtoToMedicalRecords(medicalRecordsDTO);
+		MedicalRecords medicalRecordsObj = iObjectToDtoImpl.dtoToMedicalRecords(medicalRecordsDTO);
 		List<MedicalRecords> medicalList = medicalRecordsList.getMedicalRecords();
 		for (MedicalRecords medicalRecords : medicalList) {
 			if ((medicalRecords.getFirstName().equals(medicalRecordsObj.getFirstName())
@@ -68,15 +69,15 @@ public class MedicalRecordsService {
 			}
 		}
 		MedicalRecordsList medicalRecordsList = new MedicalRecordsList(medicalList);
-		MedicalRecordsListDTO medicalRecordsListDTO = IObjectToDto.INSTANCE
-				.medicalRecordsListToDtoList(medicalRecordsList);
+		MedicalRecordsListDTO medicalRecordsListDTO = iObjectToDtoImpl.medicalRecordsListToDtoList(medicalRecordsList);
+
 		logger.info("MedicalRecordsListDTO was updated");
 
 		return medicalRecordsListDTO;
 	}
 
 	public MedicalRecordsListDTO deleteMedical(MedicalRecordsDTO medicalRecordsDTO) {
-		MedicalRecords medicalRecordsObj = IObjectToDto.INSTANCE.dtoToMedicalRecords(medicalRecordsDTO);
+		MedicalRecords medicalRecordsObj = iObjectToDtoImpl.dtoToMedicalRecords(medicalRecordsDTO);
 		List<MedicalRecords> medicalList = medicalRecordsList.getMedicalRecords();
 		for (MedicalRecords medicalRecords : medicalList) {
 			if ((medicalRecords.getFirstName().equals(medicalRecordsObj.getFirstName())
@@ -87,8 +88,7 @@ public class MedicalRecordsService {
 			}
 		}
 		MedicalRecordsList medicalRecordsList = new MedicalRecordsList(medicalList);
-		MedicalRecordsListDTO medicalRecordsListDTO = IObjectToDto.INSTANCE
-				.medicalRecordsListToDtoList(medicalRecordsList);
+		MedicalRecordsListDTO medicalRecordsListDTO = iObjectToDtoImpl.medicalRecordsListToDtoList(medicalRecordsList);
 		logger.info("MedicalRecordsListDTO was updated");
 
 		return medicalRecordsListDTO;

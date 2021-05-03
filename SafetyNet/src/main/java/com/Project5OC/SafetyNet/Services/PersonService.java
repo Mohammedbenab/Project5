@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.Project5OC.SafetyNet.DTO.PersonDTO;
 import com.Project5OC.SafetyNet.DTO.PersonListDTO;
-import com.Project5OC.SafetyNet.mapper.IObjectToDto;
+import com.Project5OC.SafetyNet.ObjectsMapper.IObjectToDtoImpl;
 import com.Project5OC.SafetyNet.model.Person;
 import com.Project5OC.SafetyNet.model.PersonList;
 
@@ -23,7 +23,9 @@ public class PersonService {
 	@Autowired
 	private ReadJsonFile readObject;
 
-//	@Autowired
+	@Autowired
+	private IObjectToDtoImpl iObjectToDtoImpl;
+
 	private PersonList personList;
 
 	@PostConstruct
@@ -32,7 +34,7 @@ public class PersonService {
 	}
 
 	public PersonListDTO savePerson(PersonDTO personDto) {
-		Person person = IObjectToDto.INSTANCE.dtoToPerson(personDto);
+		Person person = iObjectToDtoImpl.dtoToPerson(personDto);
 		List<Person> persons = personList.getPersons();
 		int result = 0;
 		for (Person personInList : persons) {
@@ -46,13 +48,13 @@ public class PersonService {
 			logger.info("Person dos not exist in the list, she was created");
 		}
 		PersonList personList = new PersonList(persons);
-		PersonListDTO personListDTO = IObjectToDto.INSTANCE.personListToDtoList(personList);
+		PersonListDTO personListDTO = iObjectToDtoImpl.personListToDtoList(personList);
 		logger.trace("PersonListDTO was created");
 		return personListDTO;
 	}
 
 	public PersonListDTO updatePerson(PersonDTO personDto) {
-		Person person = IObjectToDto.INSTANCE.dtoToPerson(personDto);
+		Person person = iObjectToDtoImpl.dtoToPerson(personDto);
 		List<Person> persons = personList.getPersons();
 		for (Person list : persons) {
 			if ((list.getFirstName().equals(person.getFirstName())
@@ -69,14 +71,14 @@ public class PersonService {
 			}
 		}
 		PersonList personList = new PersonList(persons);
-		PersonListDTO personListDTO = IObjectToDto.INSTANCE.personListToDtoList(personList);
+		PersonListDTO personListDTO = iObjectToDtoImpl.personListToDtoList(personList);
 		logger.info("PersonListDTO was updated");
 
 		return personListDTO;
 	}
 
 	public PersonListDTO deletePerson(PersonDTO personDto) {
-		Person personObj = IObjectToDto.INSTANCE.dtoToPerson(personDto);
+		Person personObj = iObjectToDtoImpl.dtoToPerson(personDto);
 		List<Person> list = personList.getPersons();
 		for (Person person : list) {
 			if (person.getFirstName().equals(personObj.getFirstName())
@@ -86,7 +88,7 @@ public class PersonService {
 			}
 		}
 		PersonList personListFinal = new PersonList(list);
-		PersonListDTO personListDTO = IObjectToDto.INSTANCE.personListToDtoList(personListFinal);
+		PersonListDTO personListDTO = iObjectToDtoImpl.personListToDtoList(personListFinal);
 		logger.info("PersonListDTO was updated");
 
 		return personListDTO;

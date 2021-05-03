@@ -22,8 +22,7 @@ import com.Project5OC.SafetyNet.DTO.URL.Url5.PersonsListUrl5Dto;
 import com.Project5OC.SafetyNet.DTO.URL.Url6.PersonUrl6Dto;
 import com.Project5OC.SafetyNet.DTO.URL.Url7.AddressListUrl7Dto;
 import com.Project5OC.SafetyNet.DTO.URL.Url7.AddressUrl7Dto;
-import com.Project5OC.SafetyNet.mapper.IObjectsToUrl;
-import com.Project5OC.SafetyNet.mapper.IObjectsToUrlImpl;
+import com.Project5OC.SafetyNet.ObjectsMapper.IObjectsToUrlImpl;
 import com.Project5OC.SafetyNet.model.Firestation;
 import com.Project5OC.SafetyNet.model.MedicalRecords;
 import com.Project5OC.SafetyNet.model.Person;
@@ -79,8 +78,7 @@ public class ServiceBuild {
 			if ((allInfPerson.getFirestation().getStation()).equals(station)) {
 				PersonAllInfo personAllInfo = new PersonAllInfo(allInfPerson.getPerson(), allInfPerson.getFirestation(),
 						allInfPerson.getMedicalRecords());
-				PersonUrl1Dto personUrl1Dto = IObjectsToUrl.INSTANCE.objectsToUrl1Dto(personAllInfo, convertString);
-//				PersonUrl1Dto personUrl1Dto = objectsToUrlImpl.objectsToUrl1Dto(personAllInfo, convertString);
+				PersonUrl1Dto personUrl1Dto = objectsToUrlImpl.objectsToUrl1Dto(personAllInfo, convertString);
 
 				listUrl.add(personUrl1Dto);
 				if (Integer.valueOf(personUrl1Dto.getAge()) >= 18) {
@@ -103,7 +101,7 @@ public class ServiceBuild {
 				List<PersonAllInfo> familly = new ArrayList<PersonAllInfo>();
 				PersonAllInfo personAllInfo = new PersonAllInfo(allInfPerson.getPerson(), allInfPerson.getFirestation(),
 						allInfPerson.getMedicalRecords());
-				PersonUrl2Dto personUrl2Dto = IObjectsToUrl.INSTANCE.objectToUrl2Dto(personAllInfo, convertString);
+				PersonUrl2Dto personUrl2Dto = objectsToUrlImpl.objectToUrl2Dto(personAllInfo, convertString);
 				for (PersonAllInfo allInfPerson2 : this.listOfPersonsWithAllInfo().getPersonsList()) {
 					if (allInfPerson2.getPerson().getLastName().equals(personUrl2Dto.getLastName())
 							&& !(allInfPerson2.getPerson().getFirstName().equals(personUrl2Dto.getFirstName()))) {
@@ -128,7 +126,7 @@ public class ServiceBuild {
 			if (allInfPerson.getFirestation().getStation().equals(firestationNumber)) {
 				PersonAllInfo person = new PersonAllInfo(allInfPerson.getPerson(), allInfPerson.getFirestation(),
 						allInfPerson.getMedicalRecords());
-				PhoneNumberDTO newPhoneDto = IObjectsToUrl.INSTANCE.numbersToUrl3Dto(person);
+				PhoneNumberDTO newPhoneDto = objectsToUrlImpl.numbersToUrl3Dto(person);
 				persons.add(newPhoneDto);
 			}
 		}
@@ -147,7 +145,7 @@ public class ServiceBuild {
 				firestationNumber = allInfPerson.getFirestation().getStation();
 				PersonAllInfo person = new PersonAllInfo(allInfPerson.getPerson(), allInfPerson.getFirestation(),
 						allInfPerson.getMedicalRecords());
-				PersonUrl4Dto newPhoneDto = IObjectsToUrl.INSTANCE.objectToUrl4Dto(person, convertString);
+				PersonUrl4Dto newPhoneDto = objectsToUrlImpl.objectToUrl4Dto(person, convertString);
 				persons.add(newPhoneDto);
 			}
 		}
@@ -163,7 +161,7 @@ public class ServiceBuild {
 				if (firestation.equals(allInfPerson.getFirestation().getStation())) {
 					PersonAllInfo person = new PersonAllInfo(allInfPerson.getPerson(), allInfPerson.getFirestation(),
 							allInfPerson.getMedicalRecords());
-					PersonUrl5Dto personUrl5Dto = IObjectsToUrl.INSTANCE.objectToUrl5Dto(person, convertString);
+					PersonUrl5Dto personUrl5Dto = objectsToUrlImpl.objectToUrl5Dto(person, convertString);
 					persons.add(personUrl5Dto);
 				}
 			}
@@ -181,7 +179,7 @@ public class ServiceBuild {
 					&& allInfPerson.getPerson().getLastName().equals(lastName)) {
 				PersonAllInfo person = new PersonAllInfo(allInfPerson.getPerson(), allInfPerson.getFirestation(),
 						allInfPerson.getMedicalRecords());
-				personUrl6Dto = IObjectsToUrl.INSTANCE.objectToUrl6Dto(person, convertString);
+				personUrl6Dto = objectsToUrlImpl.objectToUrl6Dto(person, convertString);
 				logger.info("personUrl6Dto exist");
 			}
 		}
@@ -194,7 +192,7 @@ public class ServiceBuild {
 			if (allInfPerson.getPerson().getCity().equals(city)) {
 				PersonAllInfo person = new PersonAllInfo(allInfPerson.getPerson(), allInfPerson.getFirestation(),
 						allInfPerson.getMedicalRecords());
-				AddressUrl7Dto personEmail = IObjectsToUrl.INSTANCE.objectToUrl7Dto(person);
+				AddressUrl7Dto personEmail = objectsToUrlImpl.objectToUrl7Dto(person);
 				persons.add(personEmail);
 			}
 		}

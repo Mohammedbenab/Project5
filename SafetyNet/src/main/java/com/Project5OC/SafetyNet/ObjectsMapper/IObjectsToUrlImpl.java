@@ -1,11 +1,11 @@
-package com.Project5OC.SafetyNet.mapper;
+package com.Project5OC.SafetyNet.ObjectsMapper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Generated;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.Project5OC.SafetyNet.DTO.URL.Url1.PersonUrl1Dto;
 import com.Project5OC.SafetyNet.DTO.URL.Url2.PersonUrl2Dto;
@@ -19,8 +19,8 @@ import com.Project5OC.SafetyNet.model.MedicalRecords;
 import com.Project5OC.SafetyNet.model.Person;
 import com.Project5OC.SafetyNet.model.PersonAllInfo;
 
-@Generated(value = "org.mapstruct.ap.MappingProcessor", date = "2021-01-18T18:38:07+0100", comments = "version: 1.4.1.Final, compiler: javac, environment: Java 11.0.2 (Oracle Corporation)")
-@Service
+@Generated(value = "org.mapstruct.ap.MappingProcessor", date = "2021-04-21T18:35:11+0200", comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.2 (Oracle Corporation)")
+@Component
 public class IObjectsToUrlImpl implements IObjectsToUrl {
 
 	@Override

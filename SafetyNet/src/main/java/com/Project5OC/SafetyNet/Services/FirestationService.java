@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.Project5OC.SafetyNet.DTO.FirestationDTO;
 import com.Project5OC.SafetyNet.DTO.FirestationListDTO;
-import com.Project5OC.SafetyNet.mapper.IObjectToDto;
+import com.Project5OC.SafetyNet.ObjectsMapper.IObjectToDtoImpl;
 import com.Project5OC.SafetyNet.model.Firestation;
 import com.Project5OC.SafetyNet.model.FirestationsList;
 
@@ -24,6 +24,9 @@ public class FirestationService {
 	@Autowired
 	private ReadJsonFile readObject;
 
+	@Autowired
+	private IObjectToDtoImpl iObjectToDtoImpl;
+
 	private FirestationsList firestationsList;
 
 	@PostConstruct
@@ -33,7 +36,7 @@ public class FirestationService {
 
 	public FirestationListDTO saveFirestation(FirestationDTO firestationDTO) {
 		List<Firestation> listFirestation = new ArrayList<Firestation>();
-		Firestation firestationObj = IObjectToDto.INSTANCE.dtoToFirestation(firestationDTO);
+		Firestation firestationObj = iObjectToDtoImpl.dtoToFirestation(firestationDTO);
 		listFirestation = firestationsList.getFirestations();
 		int result = 0;
 		for (Firestation fire : listFirestation) {
@@ -47,19 +50,14 @@ public class FirestationService {
 			logger.info("Firestation dos not exist, it was created");
 		}
 		FirestationsList firestationsListFinal = new FirestationsList(listFirestation);
-		FirestationListDTO firestationListDTO = IObjectToDto.INSTANCE.firestationListToDtoList(firestationsListFinal);
+		FirestationListDTO firestationListDTO = iObjectToDtoImpl.firestationListToDtoList(firestationsListFinal);
 		logger.trace("FirestationListDTO was created");
 		return firestationListDTO;
 	}
 
-	// la logique aurait été d'indiquer les informations de la station que nous
-	// voulons changer
-	// modifier
-	// The Idea, it's find solution for this problem
-	// L'ideal aurait été de distinguer chaqu'une des stations par un nb diff
 	public FirestationListDTO updateFirestation(FirestationDTO firestationDTO) {
 		List<Firestation> firestationList = new ArrayList<Firestation>();
-		Firestation firestation = IObjectToDto.INSTANCE.dtoToFirestation(firestationDTO);
+		Firestation firestation = iObjectToDtoImpl.dtoToFirestation(firestationDTO);
 		firestationList = firestationsList.getFirestations();
 		;
 		for (Firestation list : firestationList) {
@@ -72,14 +70,14 @@ public class FirestationService {
 			}
 		}
 		FirestationsList firestationListF = new FirestationsList(firestationList);
-		FirestationListDTO FireStaListDTO = IObjectToDto.INSTANCE.firestationListToDtoList(firestationListF);
+		FirestationListDTO FireStaListDTO = iObjectToDtoImpl.firestationListToDtoList(firestationListF);
 		logger.info("FireStaListDTO was updated");
 		return FireStaListDTO;
 	}
 
 	public FirestationListDTO deleteFirestation(FirestationDTO firestationDTO) {
 		List<Firestation> firestationList = new ArrayList<Firestation>();
-		Firestation firestationObj = IObjectToDto.INSTANCE.dtoToFirestation(firestationDTO);
+		Firestation firestationObj = iObjectToDtoImpl.dtoToFirestation(firestationDTO);
 		firestationList = firestationsList.getFirestations();
 		for (Firestation firestation : firestationList) {
 			if ((firestation.getStation().equals(firestationObj.getStation())
@@ -89,7 +87,7 @@ public class FirestationService {
 			}
 		}
 		FirestationsList firestationListF = new FirestationsList(firestationList);
-		FirestationListDTO FireStaListDTO = IObjectToDto.INSTANCE.firestationListToDtoList(firestationListF);
+		FirestationListDTO FireStaListDTO = iObjectToDtoImpl.firestationListToDtoList(firestationListF);
 		logger.info("FireStaListDTO was update");
 		return FireStaListDTO;
 	}

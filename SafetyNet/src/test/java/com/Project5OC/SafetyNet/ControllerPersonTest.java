@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.Project5OC.SafetyNet.DTO.PersonDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -34,7 +35,11 @@ public class ControllerPersonTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(personDto)))
 				.andDo(print())
-				.andExpect(status().isOk());
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.personsDTO.[23].firstName")
+						.value("Axel"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.personsDTO.[23].lastName")
+						.value("Biscote"));
 
 	}
 
@@ -48,7 +53,11 @@ public class ControllerPersonTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(personDto)))
 				.andDo(print())
-				.andExpect(status().isOk());
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.personsDTO.[0].address")
+						.value("1509 Culver St"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.personsDTO.[0].city")
+						.value("Choisy le roi"));
 	}
 
 	@Test
