@@ -82,7 +82,7 @@ public class MedicalRecordsService {
 		for (MedicalRecords medicalRecords : medicalList) {
 			if ((medicalRecords.getFirstName().equals(medicalRecordsObj.getFirstName())
 					&& medicalRecords.getLastName().equals(medicalRecordsObj.getLastName()))) {
-				medicalList.remove(medicalRecordsObj);
+				medicalList.remove(medicalRecords);
 				logger.info("medicalRecords was deleted");
 
 			}

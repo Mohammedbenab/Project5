@@ -76,13 +76,13 @@ public class FirestationService {
 	}
 
 	public FirestationListDTO deleteFirestation(FirestationDTO firestationDTO) {
-		List<Firestation> firestationList = new ArrayList<Firestation>();
 		Firestation firestationObj = iObjectToDtoImpl.dtoToFirestation(firestationDTO);
+		List<Firestation> firestationList = new ArrayList<Firestation>();
 		firestationList = firestationsList.getFirestations();
 		for (Firestation firestation : firestationList) {
-			if ((firestation.getStation().equals(firestationObj.getStation())
-					&& firestation.getAddress().equals(firestationObj.getAddress()))) {
-				firestationList.remove(firestationObj);
+			if (firestation.getStation().equals(firestationObj.getStation())
+					&& firestation.getAddress().equals(firestationObj.getAddress())) {
+				firestationList.remove(firestation);
 				logger.info("Firestation was deleted");
 			}
 		}

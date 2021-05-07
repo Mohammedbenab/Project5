@@ -19,6 +19,7 @@ public class SafetyNetTest {
 
 	@Test
 	public void getUrl1Test() throws Exception {
+
 		mockMvc.perform(get("/firestation")
 				.param("stationNumber", "1"))
 				.andExpect(status().isOk())
